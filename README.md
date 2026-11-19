@@ -17,7 +17,9 @@
 ![Скриншот слот-машины](img/final.png)
 
 ## Инструкция по запуску
+
 Для того чтобы запустить проект локально, надо:
+
 1. Убедиться, что установлен Flutter
 2. Клонировать репозиторий:
    ```bash
@@ -25,10 +27,31 @@
    cd slot_machine_aristova
    ```
 3. Получить все необходимые зависимости
+
 ```bash
 flutter pub get
 ```
+
 4.Запустить приложение в браузере Chrome:
+
 ```bash
 flutter run -d chrome
 ```
+
+# Лабораторная работа №10. Слот-машина
+
+Автор: Фамилия Имя. Группа: ваша группа. Дата: дата сдачи.
+| Главный экран | Результат | Монеты закончились |
+| --- | --- | --- |
+| ![Главный экран](img/main_screen.png) | ![Результат](img/win.png) | ![Нет монет]
+(img/no_coins.png)|
+
+- Запуск: `flutter pub get`, затем `flutter run -d chrome` или `flutter run -d
+ID_устройства`.
+- Звук включается отдельной кнопкой; до её нажатия приложение молчит.
+- Сборка Android: `flutter build apk --release`.
+- Готовый файл: `build/app/outputs/flutter-apk/app-release.apk`.
+- APK: https://github.com/wilcess3/slot_machine_lab10_Aristova/releases/tag/v1
+- Проверенные Flutter/Dart: Flutter 3.47.9, Dart 3.13.7(`flutter --version`)
+- Изучено: состояние и анимация; локальные ресурсы; аудиофокус; жизненный цикл и
+  освобождение плееров; иконки; Web и Android release-сборки.
