@@ -1,7 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 
-/// Owns the music and effects for one game screen.
 class SoundService {
   SoundService({
     AudioPlayer Function()? createPlayer,
@@ -18,8 +17,7 @@ class SoundService {
   String? _lastError;
   bool get isMuted => _isMuted;
   String? get lastError => _lastError;
-  // Serial execution prevents overlapping init, mute, play and dispose calls.
-  // An audio error is reported, but never breaks the game or the next command.
+
   Future<void> _run(
     Future<void> Function() action,
   ) {
@@ -69,7 +67,7 @@ class SoundService {
     _ready = true;
   }
 
-  // Preparation only. Playback starts after the user presses the sound button.
+
   Future<void> init() => _run(_prepare);
   Future<void> setMuted(bool value) {
     if (value) _isMuted = true;

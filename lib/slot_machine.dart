@@ -9,8 +9,6 @@ import 'sound_service.dart';
 class SlotMachine extends StatefulWidget {
   const SlotMachine({super.key, this.sound});
 
-  /// Внешний сервис звука, например тестовый. Если его не передали,
-  /// экран создаёт собственный сервис и сам его освобождает.
   final SoundService? sound;
   @override
   State<SlotMachine> createState() =>
@@ -53,8 +51,7 @@ class _SlotMachineState extends State<SlotMachine>
   void didChangeAppLifecycleState(
     AppLifecycleState state,
   ) {
-    // Выключаем звук, только когда приложение скрыто или свёрнуто.
-    // Кратковременная потеря фокуса (inactive) звук не выключает.
+
     if (state == AppLifecycleState.hidden ||
         state == AppLifecycleState.paused) {
       unawaited(_muteForLifecycle());
@@ -64,7 +61,6 @@ class _SlotMachineState extends State<SlotMachine>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    // Освобождаем только сервис, который экран создал сам.
     if (_ownsSound) unawaited(_sound.dispose());
     super.dispose();
   }
@@ -91,7 +87,7 @@ class _SlotMachineState extends State<SlotMachine>
   }) async {
     String result = _symbols[0];
     for (int i = 0; i < totalTicks; i++) {
-      // Три фазы скорости в зависимости от прогресса
+
       final progress = i / totalTicks;
       final delay = progress < 0.5
           ? 40 // 🟢 быстрая фаза — картинки мелькают
@@ -101,7 +97,7 @@ class _SlotMachineState extends State<SlotMachine>
       await Future.delayed(
         Duration(milliseconds: delay),
       );
-      // Виджет могли удалить из дерева во время ожидания.
+      
       if (!mounted) return result;
       result =
           _symbols[_random.nextInt(
@@ -139,7 +135,7 @@ class _SlotMachineState extends State<SlotMachine>
       ),
     ]);
     if (!mounted) return;
-    // Итог считаем один раз: он нужен и для монет, и для звука.
+   
     final isWin =
         results[0] == results[1] &&
         results[1] == results[2];
